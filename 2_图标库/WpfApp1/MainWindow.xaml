@@ -1,0 +1,106 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        Height="650"
+        Width="800">
+
+    <Window.Resources>
+        <!--Icon描述文字-->
+        <Style x:Key="Icon Text"
+               TargetType="TextBlock">
+            <Setter Property="TextAlignment"
+                    Value="Center" />
+            <Setter Property="DockPanel.Dock"
+                    Value="Bottom" />
+            <Setter Property="FontSize"
+                    Value="20" />
+        </Style>
+        <!--Icon字体文件-->
+        <Style x:Key="Icon Font"
+               TargetType="TextBlock">
+            <Setter Property="FontSize"
+                    Value="50" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="FontFamily"
+                    Value="./Resource/#iconfont" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Center" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="FontSize"
+                            Value="100" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+
+    <Grid>
+
+        <UniformGrid Rows="3">
+
+            <!--字符串绑定-->
+            <WrapPanel>
+                <DockPanel Width="150"
+                           Height="200">
+                    <TextBlock Text="xe645"
+                               Style="{StaticResource Icon Text}" />
+                    <TextBlock Text="{Binding Title}"
+                               Style="{StaticResource Icon Text}" />
+                    <TextBlock Text="&#xe645;"
+                               Style="{StaticResource Icon Font}" />
+                </DockPanel>
+            </WrapPanel>
+            <!--对象绑定-->
+            <WrapPanel>
+                <DockPanel Width="150"
+                           Height="200"
+                           DataContext="{Binding Icon}">
+                    <TextBlock Text="{Binding IconCode}"
+                               Style="{StaticResource Icon Text}" />
+                    <TextBlock Text="{Binding Name}"
+                               Style="{StaticResource Icon Text}" />
+                    <TextBlock Text="{Binding IconFont}"
+                               Style="{StaticResource Icon Font}" />
+                </DockPanel>
+            </WrapPanel>
+
+
+            <!--对象集合绑定-->
+
+            <!--数据模板-->
+            <ItemsControl ItemsSource="{Binding IconList}">
+
+                <!--数据模板布局元素-->
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <!--数据模板内容-->
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <DockPanel Width="150"
+                                   Height="200">
+                            <TextBlock Text="{Binding IconCode}"
+                                       Style="{StaticResource Icon Text}" />
+                            <TextBlock Text="{Binding Name}"
+                                       Style="{StaticResource Icon Text}" />
+                            <TextBlock Text="{Binding IconFont}"
+                                       Style="{StaticResource Icon Font}" />
+                        </DockPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+
+        </UniformGrid>
+    </Grid>
+</Window>
